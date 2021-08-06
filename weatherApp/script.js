@@ -6,12 +6,14 @@ const wind = document.querySelector('.weather-indicator-wind>.value')
 const pressure = document.querySelector('.weather-indicator-pressure>.value')
 const image = document.querySelector('.weather-image')
 const temperature = document.querySelector('.weather-temp>.value')
+let suggestions = document.querySelector('#suggestions')
 
 const forecastBlock = document.querySelector('.weather-forecast')
 
 const APIKey = 'd8bc3ea3b1087bf69d7d0583d416ae79'
 const weatherBaseEndPoint = 'https://api.openweathermap.org/data/2.5/weather?units=metric&appid=' + APIKey
 const forecastBaseEndPoint = 'https://api.openweathermap.org/data/2.5/forecast?units=metric&appid=' + APIKey
+const cityBaseEndPoint = 'https://api.teleport.org/api/cities/?search'
 
 let weatherImages = [
     {
@@ -85,6 +87,20 @@ searchInput.addEventListener('keydown', async(e)=>{
         updateForecast(forecast)
     }
 })
+
+// searchInput.addEventListener('input', async ()=>{
+//     let endPoint = cityBaseEndPoint + searchInput.value
+//     let data = await (await fetch(endPoint)).json()
+//     suggestions.innerHTML = ''
+//     let cities = data._embedded['city:search-results']
+//     let length = cities.length > 5 ? 5 : cities.length
+//     for (let index = 0; index < length; index++) {
+//         let option = document.createElement('option')
+//         option.value = cities[index].matching_full_name
+//         suggestions.appendChild(option)
+//     }    
+// })
+
 
 let updateCurrentWeather = (data)=>{
     city.textContent = data.name + ', ' + data.sys.country
